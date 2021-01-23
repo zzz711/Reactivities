@@ -1,11 +1,8 @@
 *.db
 */bin/*
 */obj/*
+obj/*
 ### vscode ###
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
 *.code-workspace
 appsettings.json
