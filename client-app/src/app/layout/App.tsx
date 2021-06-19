@@ -14,7 +14,7 @@ function App() {
   }, [activityStore])
     
 
-  if (activityStore.loadingInital) return <LoadingComponnet content='Loading app' />
+  if (activityStore.loadingInitial) return <LoadingComponnet content='Loading app' />
 
   return (
     <>
