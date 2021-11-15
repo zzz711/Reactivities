@@ -7,16 +7,17 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Presistence;
+using Aplication.Core;
 
 namespace Aplication.Activities
 {
     public class List
     {
-        public class Query : IRequest<List<Activity>>
+        public class Query : IRequest<Result<List<Activity>>>
         {
         }
 
-        public class Handler : IRequestHandler<Query, List<Activity>>
+        public class Handler : IRequestHandler<Query, Result<List<Activity>>>
         {
             private readonly DataContext _context;
             private readonly ILogger<List> _logger;
@@ -27,10 +28,10 @@ namespace Aplication.Activities
             }
 
 
-            public async Task<List<Activity>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<List<Activity>>> Handle(Query request, CancellationToken cancellationToken)
             {
 
-                try
+                /*try
                 {
                     for (var i = 0; i < 10; i++)
                     {
@@ -42,9 +43,9 @@ namespace Aplication.Activities
                 catch (Exception e) when (e is TaskCanceledException)
                 {
                     _logger.LogInformation("Task was cancelled");
-                }
+                }*/
 
-                return await _context.Activities.ToListAsync(cancellationToken);
+                return Result<List<Activity>>.Success( await _context.Activities.ToListAsync(cancellationToken));
             }
         }
     }
