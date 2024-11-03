@@ -47,7 +47,7 @@ namespace Application.Activities
                 if(attendance != null && hostUserName != user.UserName)
                     activity.Attendees.Remove(attendance);
 
-                if(attendance != null)
+                if(attendance == null)
                 {
                     attendance = new Domain.ActivityAttendee
                     {
