@@ -14,8 +14,8 @@ public class ActivitiesController(AppDbContext context) : BaseApiController
         return await context.Activities.ToListAsync();
     }
 
-    [HttpGet("id")]
-    public async Task<ActionResult<Activity>> GetActivityDeatil(string id)
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Activity>> GetActivityDetail(string id)
     {
         var activity = await context.Activities.FindAsync(id);
 
