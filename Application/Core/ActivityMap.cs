@@ -4,20 +4,18 @@ namespace Application.Core;
 
 public class ActivityMap
 {
-    public static Activity MapActivity(Activity activity)
+    public static void MapActivity(Activity activity, ref Activity outActivity)
     {
-        return new Activity
-        {
-            Id = activity.Id,
-            Title = activity.Title,
-            Date = activity.Date,
-            Description = activity.Description,
-            Category = activity.Category,
-            IsCancelled = activity.IsCancelled,
-            City = activity.City,
-            Venue = activity.Venue,
-            Latitude = activity.Latitude,
-            Longitude = activity.Longitude
-        };
+
+        outActivity.Id = activity.Id;
+        outActivity.Title = activity.Title;
+        outActivity.Date = activity.Date;
+        outActivity.Description = activity.Description;
+        outActivity.Category = activity.Category;
+        outActivity.IsCancelled = activity.IsCancelled;
+        outActivity.City = activity.City;
+        outActivity.Venue = activity.Venue;
+        outActivity.Latitude = activity.Latitude;
+        outActivity.Longitude = activity.Longitude;
     }
 }
