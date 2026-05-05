@@ -1,5 +1,5 @@
 import { Box, Button, Paper, Typography } from '@mui/material';
-import { useActivities } from '../../../lib/types/hooks/useActivities';
+import { useActivities } from '../../../lib/hooks/useActivities';
 import { useNavigate, useParams } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
