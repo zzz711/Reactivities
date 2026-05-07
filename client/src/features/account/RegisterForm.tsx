@@ -9,7 +9,6 @@ import { Box, Button, Paper, Typography } from '@mui/material';
 import { LockOpen } from '@mui/icons-material';
 import TextInput from '../../app/shared/components/TextInput';
 import { Link } from 'react-router';
-import { toast } from 'react-toastify';
 
 export default function RegisterForm() {
   const { registerUser } = useAccount();

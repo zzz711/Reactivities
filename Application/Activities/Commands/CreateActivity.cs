@@ -1,5 +1,6 @@
 using Application.Activities.DTO;
 using Application.Core;
+using Application.Interfaces;
 using Domain;
 using FluentValidation;
 using MediatR;
@@ -14,16 +15,27 @@ public class CreateActivity
         public required CreateActivityDTO ActivityDto { get; set; }
     }
 
-    public class Handler(AppDbContext context/*, IValidator<Command> validator*/) : IRequestHandler<Command, Result<string>>
+    public class Handler(AppDbContext context, IUserAccessor userAccessor /*, IValidator<Command> validator*/) : IRequestHandler<Command, Result<string>>
     {
         public async Task<Result<string>> Handle(Command request, CancellationToken cancellationToken)
         {
             //TODO: enable this after moving away from mediatR
             //await validator.ValidateAndThrowAsync(request, cancellationToken);
 
-            var activity = ActivityMap.MapActivityDTO(request.ActivityDto);
+            var user = await userAccessor.GetUserAsync();
+
+            var activity = ActivityMap.MapCreateActivityDTO(request.ActivityDto);
 
             context.Activities.Add(activity);
+
+            var attendee = new ActivityAttendee
+            {
+                ActivityId = activity.Id,
+                UserId = user.Id,
+                IsHost = true
+            };
+
+            activity.Attendees.Add(attendee);
 
             var result = await context.SaveChangesAsync(cancellationToken) > 0;
 
