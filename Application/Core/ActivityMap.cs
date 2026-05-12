@@ -74,4 +74,15 @@ public class ActivityMap
             ImageUrl = attendee.User.ImageUrl
         };
     }
+
+    public static UserProfile MapUserToUserProfile(User user)
+    {   
+        return new UserProfile
+        {
+            Id = user.Id,
+            DisplayName = user.DisplayName!,
+            Bio = user.Bio,
+            ImageUrl = user.ImageUrl
+        };
+    }
 }
