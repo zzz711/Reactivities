@@ -14,6 +14,7 @@ type Activity = {
   isHost: boolean
   hostId: string
   hostDisplayName: string
+  hostImageUrl: string
 }
 
 interface Profile {
@@ -21,6 +22,11 @@ interface Profile {
   displayName: string
   bio?: string
   imageUrl?: string
+}
+
+interface Photo {
+  id: string,
+  url: string
 }
 
 interface User {
