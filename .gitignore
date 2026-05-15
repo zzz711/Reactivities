@@ -469,3 +469,4 @@ appsettings.Development.json
 /client/ssl/*
 /API/appsettings.json
 /.config*
+*.lscache
