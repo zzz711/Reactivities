@@ -85,4 +85,18 @@ public class ActivityMap
             ImageUrl = user.ImageUrl
         };
     }
+
+    public static CommentDto MapComment(Comment comment)
+    {
+        return new CommentDto
+        {
+            Id = comment.Id,
+            Body = comment.Body,
+            CreatedAt = comment.CreatedAt,
+            UserId = comment.User.Id,
+            DisplayName = comment.User.DisplayName!,
+            ImageUrl = comment.User.ImageUrl,
+            ActivityId = comment.ActivityId         
+        };
+    }
 }
