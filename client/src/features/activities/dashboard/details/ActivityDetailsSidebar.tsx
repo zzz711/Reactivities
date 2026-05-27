@@ -15,8 +15,7 @@ interface Props {
 }
 
 export default function ActivityDetailsSidebar({ activity }: Props) {
-  const following = true;
-
+ // console.log(activity.attendees)
   return (
     <>
       <Paper
@@ -47,8 +46,8 @@ export default function ActivityDetailsSidebar({ activity }: Props) {
                     />
                   </ListItemAvatar>
                   <ListItemText>
-                    <Typography variant="h6">{attendee.displayName}</Typography>
-                    {following && (
+                    <Typography variant="h6">{attendee.displayName}</Typography>                   
+                    {attendee.isFollowing && (
                       <Typography variant="body2" color="orange">
                         Following
                       </Typography>

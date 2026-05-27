@@ -1,5 +1,6 @@
 using Application.Activities.DTO;
 using Application.Core;
+using Application.Interfaces;
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +15,7 @@ namespace Application.Activities.Queries
             public required string Id { get; set; }
         }
 
-        public class Handler(AppDbContext context) : IRequestHandler<Query, Result<ActivityDto>>
+        public class Handler(AppDbContext context, IUserAccessor userAccessor) : IRequestHandler<Query, Result<ActivityDto>>
         {
             public async Task<Result<ActivityDto>> Handle(Query request, CancellationToken cancellationToken)
             {
@@ -23,9 +24,12 @@ namespace Application.Activities.Queries
                     .ThenInclude(x => x.User)
                     .FirstOrDefaultAsync(x => request.Id == x.Id, cancellationToken);
 
-                if (activity == null) return Result<ActivityDto>.Failure("Activity not found", 404);
+                if (activity == null) return Result<ActivityDto>.Failure("Activity not found", 404);               
 
-                var mappedActivity = ActivityMap.MapActivityDTO(activity, activity.Attendees);
+                var currentUserId = userAccessor.GetUserId();
+                var followers = await context.UserFollowings.Where(x => x.TargetId != currentUserId).ToListAsync();
+
+                var mappedActivity = ActivityMap.MapActivityDTO(activity, activity.Attendees, currentUserId, followers);
 
                 return Result<ActivityDto>.Success(mappedActivity);
             }

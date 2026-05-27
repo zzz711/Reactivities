@@ -35,7 +35,7 @@ public class ActivityMap
         };
     }
 
-    public static ActivityDto MapActivityDTO(Activity activity, ICollection<ActivityAttendee> attendees)
+    public static ActivityDto MapActivityDTO(Activity activity, ICollection<ActivityAttendee> attendees, string currentUserId, List<UserFollowing> followers)
     {
         var host = attendees.FirstOrDefault(x => x.IsHost)!.User;
 
@@ -43,7 +43,12 @@ public class ActivityMap
 
         foreach(var attendee in attendees)
         {
-            users.Add(MapUserProfile(attendee));
+            bool isFollowing = false;
+
+            if (followers.Any(x => x.FollowerId == currentUserId))
+                isFollowing = true;
+
+            users.Add(MapUserProfile(attendee, isFollowing));
         }
 
         return new ActivityDto
@@ -64,25 +69,28 @@ public class ActivityMap
         };
     }
 
-    public static UserProfile MapUserProfile(ActivityAttendee attendee)
+    public static UserProfile MapUserProfile(ActivityAttendee attendee, bool isFollowing)
     {
         return new UserProfile
         {
             Id = attendee.User.Id,
             DisplayName = attendee.User.DisplayName!,
             Bio = attendee.User.Bio,
-            ImageUrl = attendee.User.ImageUrl
+            ImageUrl = attendee.User.ImageUrl,
+            IsFollowing = isFollowing
         };
     }
 
     public static UserProfile MapUserToUserProfile(User user)
-    {   
+    {           
         return new UserProfile
         {
             Id = user.Id,
             DisplayName = user.DisplayName!,
             Bio = user.Bio,
-            ImageUrl = user.ImageUrl
+            ImageUrl = user.ImageUrl,
+            FollowersCount = user.Followers.Count,
+            FollowingCount = user.Followings.Count,
         };
     }
 
