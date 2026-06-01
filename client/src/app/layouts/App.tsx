@@ -15,7 +15,7 @@ function App() {
       ) : (
         <>
           <NavBar />
-          <Container maxWidth="xl" sx={{ marginTop: 3 }}>
+          <Container maxWidth="xl" sx={{ paddingTop: 13 }}>
             <Outlet />
           </Container>
         </>

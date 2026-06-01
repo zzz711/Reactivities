@@ -3,6 +3,7 @@ import { useState } from 'react';
 import ProfilePhotos from './ProfilePhotos';
 import ProfileAbout from '../../app/shared/components/ProfileAbout';
 import ProfileFollowings from './ProfileFollowings';
+import ProfileEvents from './ProfileEvents';
 
 export default function ProfileContent() {
   const [value, setValue] = useState(0);
@@ -10,7 +11,7 @@ export default function ProfileContent() {
   const tabContent = [
     { label: 'About', content: <ProfileAbout /> },
     { label: 'Photos', content: <ProfilePhotos /> },
-    { label: 'Events', content: <div>Events</div> },
+    { label: 'Events', content: <ProfileEvents /> },
     { label: 'Followers', content: <ProfileFollowings activeTab={value}/> },
     { label: 'Following', content: <ProfileFollowings activeTab={value}/> },
   ];

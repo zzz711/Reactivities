@@ -2,8 +2,6 @@ using Application.Core;
 using Application.Interfaces;
 using Application.Profiles.DTOs;
 using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 

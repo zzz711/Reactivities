@@ -107,4 +107,15 @@ public class ActivityMap
             ActivityId = comment.ActivityId         
         };
     }
+
+    public static UserActivity MapUserActivity(Activity activity)
+    {
+        return new UserActivity
+        {
+            Id = activity.Id,
+            Title = activity.Title,
+            Category = activity.Category,
+            Date = activity.Date
+        };
+    }
 }
